@@ -120,17 +120,17 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Cursor: hide native cursor immediately before JS loads */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          *, *::before, *::after { cursor: none !important; }
-        `}} />
+        {/* Cursor: hide native cursor before JS loads — no flash */}
+        <style dangerouslySetInnerHTML={{ __html: "*, *::before, *::after { cursor: none !important; }" }} />
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link rel="preconnect"   href="https://fonts.googleapis.com" />
         <link rel="preconnect"   href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
         <script type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       </head>
       <body
@@ -139,7 +139,7 @@ export default function RootLayout({
         <div className="noise-overlay" aria-hidden="true" />
         <AnimationsOrchestrator />
         <SmoothScrollProvider>
-          <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
+          {children}
         </SmoothScrollProvider>
       </body>
     </html>

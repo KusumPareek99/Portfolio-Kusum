@@ -213,7 +213,7 @@ function SocialCard({ s, index, inView }: { s: typeof SOCIALS[0]; index: number;
       whileHover={{x:6}}
       style={{ display:"flex",alignItems:"center",gap:14,padding:"16px 18px",borderRadius:14,
         background:hov?T.s3:T.s2, border:`1px solid ${hov?s.accent+"55":T.border}`,
-        textDecoration:"none", boxShadow:hov?`0 8px 32px ${s.accent}14`:"none",
+        textDecoration:"none", boxShadow:hov?`0 8px 32px ${s.accent}14`:`0 0px 0px ${s.accent}00`,
         transition:"background 0.22s,border-color 0.25s,box-shadow 0.25s",cursor:"pointer" }}>
       <motion.div animate={hov?{scale:1.1,rotate:-4}:{scale:1,rotate:0}}
         transition={{type:"spring",stiffness:280,damping:20}}

@@ -1,111 +1,127 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
-const VIOLET = "#8B5CF6";
 const CYAN   = "#22D3EE";
+const VIOLET = "#8B5CF6";
 
 export default function CursorFollower() {
-  const [visible,      setVisible] = useState(false);
-  const [hoveringLink, setHovL]    = useState(false);
-  const [hoveringCard, setHovC]    = useState(false);
-  // Start as false — detect touch after mount
-  const [isTouch,      setIsTouch] = useState(false);
-  const didInit = useRef(false);
+  const outerX    = useMotionValue(-500);
+  const outerY    = useMotionValue(-500);
+  const innerX    = useMotionValue(-500);
+  const innerY    = useMotionValue(-500);
+  const outerSize = useMotionValue(22);
+  const dotSize   = useMotionValue(8);
+  const opacity   = useMotionValue(0);
 
-  const rawX = useMotionValue(-200);
-  const rawY = useMotionValue(-200);
-  const x  = useSpring(rawX, { stiffness: 220, damping: 32 });
-  const y  = useSpring(rawY, { stiffness: 220, damping: 32 });
-  const ix = useSpring(rawX, { stiffness: 600, damping: 40 });
-  const iy = useSpring(rawY, { stiffness: 600, damping: 40 });
+  const x  = useSpring(outerX, { stiffness: 200, damping: 30 });
+  const y  = useSpring(outerY, { stiffness: 200, damping: 30 });
+  const ix = useSpring(innerX, { stiffness: 900, damping: 45 });
+  const iy = useSpring(innerY, { stiffness: 900, damping: 45 });
 
   useEffect(() => {
-    if (didInit.current) return;
-    didInit.current = true;
-
-    const touch   = window.matchMedia("(hover: none)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (touch || reduced) {
-      setIsTouch(true);
-      return;
+    // Inject cursor:none — appended last so it wins cascade
+    const existing = document.getElementById("kp-no-cursor");
+    if (!existing) {
+      const s = document.createElement("style");
+      s.id = "kp-no-cursor";
+      s.textContent = "html,html *,html *::before,html *::after{cursor:none!important}";
+      document.head.appendChild(s);
     }
 
-    // Force cursor:none on html and every element — belt-and-suspenders
-    // because some browsers apply UA cursor styles with high specificity
-    const style = document.createElement("style");
-    style.id = "cursor-none-override";
-    style.textContent = `
-      *, *::before, *::after,
-      html, body, a, button, input, textarea, select, [role="button"] {
-        cursor: none !important;
-      }
-    `;
-    document.head.appendChild(style);
+    let moved = false;
 
     function onMove(e: MouseEvent) {
-      rawX.set(e.clientX);
-      rawY.set(e.clientY);
-      ix.set(e.clientX);
-      iy.set(e.clientY);
-      setVisible(true);
+      if (!moved) {
+        moved = true;
+        // Snap to position instantly on first move — no spring lag from -500
+        outerX.jump(e.clientX);
+        outerY.jump(e.clientY);
+        innerX.jump(e.clientX);
+        innerY.jump(e.clientY);
+        opacity.set(0.9);
+      } else {
+        outerX.set(e.clientX);
+        outerY.set(e.clientY);
+        innerX.set(e.clientX);
+        innerY.set(e.clientY);
+      }
     }
 
     function onOver(e: MouseEvent) {
       const t = e.target as Element;
       const isLink = !!t.closest("a,button,[role='button'],[data-cursor-link]");
-      const isCard = !!t.closest("[data-cursor-card]");
-      setHovL(isLink);
-      setHovC(isCard && !isLink);
+      outerSize.set(isLink ? 38 : 22);
+      dotSize.set(isLink ? 5 : 8);
     }
 
-    function onOut() { setHovL(false); setHovC(false); }
-    function onLeave() { setVisible(false); }
+    function onOut()    { outerSize.set(22); dotSize.set(8); }
+    function onLeave()  { opacity.set(0); }
+    function onEnter()  { if (moved) opacity.set(0.9); }
 
-    window.addEventListener("mousemove",    onMove,  { passive: true });
-    window.addEventListener("mouseover",    onOver,  { passive: true });
-    window.addEventListener("mouseout",     onOut,   { passive: true });
+    window.addEventListener("mousemove",    onMove,   { passive: true });
+    window.addEventListener("mouseover",    onOver,   { passive: true });
+    window.addEventListener("mouseout",     onOut,    { passive: true });
     document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseenter", onEnter);
 
     return () => {
-      document.getElementById("cursor-none-override")?.remove();
+      document.getElementById("kp-no-cursor")?.remove();
       window.removeEventListener("mousemove",    onMove);
       window.removeEventListener("mouseover",    onOver);
       window.removeEventListener("mouseout",     onOut);
       document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseenter", onEnter);
     };
+  // deps intentionally empty — motion values are stable refs
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isTouch) return null;
-
-  const outerSize   = hoveringLink ? 36 : hoveringCard ? 28 : 18;
-  const outerColor  = hoveringLink ? "transparent" : `rgba(139,92,246,${hoveringCard ? 0.12 : 0.08})`;
-  const outerBorder = hoveringLink ? `1.5px solid ${VIOLET}` : "none";
-
   return (
     <>
-      <motion.div aria-hidden="true" style={{
-        position:"fixed", left:0, top:0, x, y,
-        translateX:"-50%", translateY:"-50%",
-        width:outerSize, height:outerSize, borderRadius:"50%",
-        background:outerColor, border:outerBorder,
-        pointerEvents:"none", zIndex:100000,
-        opacity: visible ? 1 : 0,
-        transition:"width 0.2s ease,height 0.2s ease,background 0.2s ease,border 0.2s ease",
-      }}/>
-      <motion.div aria-hidden="true" style={{
-        position:"fixed", left:0, top:0, x:ix, y:iy,
-        translateX:"-50%", translateY:"-50%",
-        width: hoveringLink ? 4 : 6, height: hoveringLink ? 4 : 6,
-        borderRadius:"50%", background: hoveringLink ? VIOLET : CYAN,
-        pointerEvents:"none", zIndex:100001,
-        opacity: visible ? (hoveringLink ? 0.9 : 0.6) : 0,
-        boxShadow:`0 0 8px ${hoveringLink ? VIOLET : CYAN}88`,
-        transition:"width 0.15s ease,height 0.15s ease,background 0.2s ease",
-      }}/>
+      {/* Outer ring */}
+      <motion.div
+        aria-hidden="true"
+        style={{
+          position:     "fixed",
+          top:          0,
+          left:         0,
+          x, y,
+          translateX:   "-50%",
+          translateY:   "-50%",
+          width:        outerSize,
+          height:       outerSize,
+          borderRadius: "50%",
+          background:   `rgba(139,92,246,0.12)`,
+          border:       `1.5px solid rgba(139,92,246,0.45)`,
+          pointerEvents:"none",
+          zIndex:       2147483645,
+          opacity,
+        }}
+      />
+
+      {/* Inner dot */}
+      <motion.div
+        aria-hidden="true"
+        style={{
+          position:     "fixed",
+          top:          0,
+          left:         0,
+          x:  ix,
+          y:  iy,
+          translateX:   "-50%",
+          translateY:   "-50%",
+          width:        dotSize,
+          height:       dotSize,
+          borderRadius: "50%",
+          background:   CYAN,
+          pointerEvents:"none",
+          zIndex:       2147483646,
+          opacity,
+          boxShadow:    `0 0 10px ${CYAN}BB`,
+        }}
+      />
     </>
   );
 }

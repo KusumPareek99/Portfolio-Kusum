@@ -3,6 +3,17 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
+/**
+ * SmoothScrollProvider
+ * --------------------
+ * Wraps the page in Lenis smooth scroll.
+ *
+ * CRITICAL: Do NOT add a "scroll" event listener inside lenis.on("scroll", ...)
+ * that calls window.dispatchEvent(new Event("scroll")).
+ * That creates an infinite loop:
+ *   Lenis scroll → dispatches native scroll → Lenis detects scroll → repeat
+ * → Maximum call stack size exceeded
+ */
 export default function SmoothScrollProvider({
   children,
 }: {
@@ -20,30 +31,26 @@ export default function SmoothScrollProvider({
 
     import("lenis").then((mod) => {
       if (cancelled) return;
+
       const Lenis = mod.default;
       if (typeof Lenis !== "function") return;
 
       const lenis = new Lenis({
-        duration:        1.15,
-        easing:          (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation:     "vertical" as const,
         smoothWheel:     true,
         wheelMultiplier: 0.9,
         touchMultiplier: 1.8,
+        // ← NO scroll listener here — see note above
       });
 
       lenisRef.current = lenis;
-
-      lenis.on("scroll", () => {
-        window.dispatchEvent(new Event("scroll"));
-      });
 
       const raf = (time: number) => {
         lenis.raf(time);
         rafRef.current = requestAnimationFrame(raf);
       };
       rafRef.current = requestAnimationFrame(raf);
-    }).catch((e) => console.warn("Lenis failed:", e));
+
+    }).catch((e) => console.warn("[SmoothScrollProvider] Lenis failed:", e));
 
     return () => {
       cancelled = true;
