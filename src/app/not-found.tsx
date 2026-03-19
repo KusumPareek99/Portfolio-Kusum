@@ -61,7 +61,7 @@ export default function NotFound() {
           lineHeight: 1.6,
         }}
       >
-        This page doesn't exist. Maybe you were looking for a project or
+        This page doesn&apos;t exist. Maybe you were looking for a project or
         section?
       </p>
 

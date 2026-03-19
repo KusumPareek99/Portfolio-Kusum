@@ -149,7 +149,7 @@ function SkillRow({ sk, index, triggered }: { sk: SkillItem; index: number; trig
       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = C.border;      (e.currentTarget as HTMLElement).style.background = C.s2; }}
     >
       <motion.div style={{ width:10, height:10, borderRadius:"50%", flexShrink:0, background:sk.color, boxShadow:`0 0 8px ${sk.color}99` }} whileHover={{ scale:1.4 }}/>
-      <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:13, color:C.t1, flex:1 }}>{sk.name}</span>
+      <span style={{ fontFamily:" .nextSyne',sans-serif", fontWeight:700, fontSize:13, color:C.t1, flex:1 }}>{sk.name}</span>
       <div style={{ width:80, flexShrink:0 }}><HBar pct={sk.pct} color={sk.color} triggered={triggered} delay={0.06*index+0.1}/></div>
       <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:sk.color, width:34, textAlign:"right", flexShrink:0 }}>{sk.pct}%</span>
       <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, letterSpacing:"0.06em", color:ts.color, background:ts.bg, border:`1px solid ${ts.border}`, borderRadius:999, padding:"2px 8px", flexShrink:0 }}>{sk.tag}</span>
