@@ -510,7 +510,7 @@ export default function ExperienceTimeline() {
   ];
 
   return (
-    <section ref={sectionRef} style={{ background: T.bg, minHeight: "100vh", padding: "80px 24px 100px", position: "relative", overflow: "hidden", fontFamily: "'Epilogue', sans-serif" }}>
+    <section id="experience" ref={sectionRef} style={{ background: T.bg, minHeight: "100vh", padding: "80px 24px 100px", position: "relative", overflow: "hidden", fontFamily: "'Epilogue', sans-serif" }}>
       <div style={{ position:"absolute", top:"-8%", right:"-4%", width:"40%", height:"50%", background:`radial-gradient(ellipse, ${T.violet}0C 0%, transparent 70%)`, borderRadius:"50%", pointerEvents:"none" }}/>
       <div style={{ position:"absolute", bottom:"-8%", left:"-4%", width:"35%", height:"45%", background:`radial-gradient(ellipse, ${T.cyan}07 0%, transparent 70%)`, borderRadius:"50%", pointerEvents:"none" }}/>
 

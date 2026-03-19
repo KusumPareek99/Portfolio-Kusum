@@ -138,7 +138,7 @@ export default function About() {
         background:   T.bg,
         position:     "relative",
         zIndex:       1,
-        padding:      "96px 24px",
+        padding:      "80px 16px",
       }}
     >
       {/* Top rule */}
@@ -296,7 +296,10 @@ export default function About() {
       {/* Responsive: stack to single column on mobile */}
       <style>{`
         @media (max-width: 900px) {
-          .about-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+        }
+        @media (max-width: 600px) {
+          .about-grid { padding: 0 4px; }
         }
       `}</style>
     </section>

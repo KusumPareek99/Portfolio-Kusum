@@ -319,7 +319,7 @@ function ContactForm({ inView }: { inView: boolean }) {
             </AnimatePresence>
 
             <form onSubmit={handleSubmit} noValidate style={{ display:"flex",flexDirection:"column",gap:18 }}>
-              <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:14 }}>
+              <div className="name-email-grid" style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:14 }}>
                 <Field id="name" label="Full Name" placeholder="Jane Smith" value={formData.name}
                   error={errors.name} touched={!!touched.name} onChange={handleChange} onBlur={handleBlur} disabled={isDisabled}/>
                 <Field id="email" label="Email" type="email" placeholder="jane@example.com" value={formData.email}
@@ -391,7 +391,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section ref={sectionRef} style={{ background:T.bg,minHeight:"100vh",padding:"80px 24px 100px",
+    <section ref={sectionRef} style={{ background:T.bg,minHeight:"100vh",padding:"80px 16px 80px",
       position:"relative",overflow:"hidden" }}>
 
       {/* BG glows */}
@@ -443,7 +443,7 @@ export default function ContactSection() {
         </div>
 
         {/* Two-column grid */}
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1.45fr",gap:28,alignItems:"start"}}>
+        <div className="contact-grid" style={{display:"grid",gridTemplateColumns:"1fr 1.45fr",gap:28,alignItems:"start"}}>
 
           {/* LEFT */}
           <div ref={leftRef} style={{display:"flex",flexDirection:"column",gap:22}}>
@@ -513,7 +513,7 @@ export default function ContactSection() {
           </div>
 
           {/* RIGHT: Form */}
-          <ContactForm inView={sectionInView}/>
+          <ContactForm inView={true}/>
         </div>
 
         {/* Footer strip */}
@@ -532,13 +532,18 @@ export default function ContactSection() {
 
       <style>{`
         @media (max-width: 860px) {
-          .contact-grid { grid-template-columns: 1fr !important; }
+          .contact-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
         @media (max-width: 540px) {
-          .name-email-grid { grid-template-columns: 1fr !important; }
+          .name-email-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
         input::placeholder, textarea::placeholder { color: #3A3A60; }
         input, textarea { -webkit-appearance: none; }
+        input, textarea, select, button { font-size: 16px; }
       `}</style>
     </section>
   );

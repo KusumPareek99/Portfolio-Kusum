@@ -339,14 +339,14 @@ export const certificates: Certificate[] = [
     title: "Software Engineering Virtual Experience",
     issuer: "jpmorgan",
     issuerLabel: "J.P. Morgan",
-    link: "#",
+    link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/J.P.%20Morgan/R5iK7HMxJGBgaSbvk_J.P.%20Morgan_YWLHrsjmhvq3Z6z5P_1714137711516_completion_certificate.pdf",
   },
   {
     id: "deloitte",
     title: "Technology Job Simulation",
     issuer: "deloitte",
     issuerLabel: "Deloitte Australia",
-    link: "#",
+    link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/udmxiyHeqYQLkTPvf_9PBTqmSxAf6zZTseP_YWLHrsjmhvq3Z6z5P_1752415479836_completion_certificate.pdf",
     date: "July 2025",
   },
 ];
@@ -412,7 +412,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/kusum-pareek",
+    href: "https://www.linkedin.com/in/kusum-p-a54759191",
     icon: "Linkedin",
   },
   {

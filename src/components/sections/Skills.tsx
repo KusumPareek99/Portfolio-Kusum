@@ -219,7 +219,7 @@ function CategoryPanel({ catKey, view, sectionInView }: { catKey: string; view: 
         <AnimatePresence mode="wait">
           {view === "grid" ? (
             <motion.div key="grid" initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} transition={{ duration:0.2 }}
-              style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(130px, 1fr))", gap:10 }}>
+              style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(120px, 1fr))", gap:8 }}>
               {cat.items.map((sk, i) => <SkillCard key={sk.name} sk={sk} index={i} triggered={triggered}/>)}
             </motion.div>
           ) : (
@@ -300,7 +300,7 @@ function OverviewSidebar({ sectionInView, activeFilter }: { sectionInView: boole
 function ControlBar({ filter, setFilter, view, setView }: { filter: string; setFilter: (v: string) => void; view: string; setView: (v: string) => void }) {
   return (
     <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:12, marginBottom:32 }}>
-      <div style={{ display:"flex", gap:7, flexWrap:"wrap" }}>
+      <div className="skills-filter-bar" style={{ display:"flex", gap:7, flexWrap:"wrap" }}>
         {[{ key:"all", label:"All", accent:C.violet }, ...CATEGORY_KEYS.map(k => ({ key:k, label:SKILLS[k].label, accent:SKILLS[k].accent }))].map(f => {
           const isActive = filter === f.key;
           return (
@@ -356,7 +356,7 @@ export default function SkillsSection() {
   const visibleKeys = filter === "all" ? CATEGORY_KEYS : CATEGORY_KEYS.filter(k => k === filter);
 
   return (
-    <section ref={sectionRef} style={{ background:C.bg, minHeight:"100vh", padding:"80px 24px 100px", position:"relative", overflow:"hidden" }}>
+    <section ref={sectionRef} style={{ background:C.bg, minHeight:"100vh", padding:"80px 16px 80px", position:"relative", overflow:"hidden" }}>
       <div style={{ position:"absolute", top:"-8%", right:"-4%", width:"38%", height:"48%", background:`radial-gradient(ellipse, ${C.violet}0B 0%, transparent 70%)`, borderRadius:"50%", pointerEvents:"none" }}/>
       <div style={{ position:"absolute", bottom:"-6%", left:"-4%", width:"34%", height:"44%", background:`radial-gradient(ellipse, ${C.cyan}07 0%, transparent 70%)`, borderRadius:"50%", pointerEvents:"none" }}/>
       <motion.div initial={{ scaleX:0 }} animate={sectionInView ? { scaleX:1 } : {}} transition={{ duration:1.4, ease:[0.25,0.4,0.25,1] }}
@@ -365,7 +365,7 @@ export default function SkillsSection() {
       <div style={{ maxWidth:1280, margin:"0 auto" }}>
         <SectionHeader inView={sectionInView}/>
         <ControlBar filter={filter} setFilter={setFilter} view={view} setView={setView}/>
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 280px", gap:24, alignItems:"start" }}>
+        <div className="skills-layout" style={{ display:"grid", gridTemplateColumns:"1fr 280px", gap:24, alignItems:"start" }}>
           <div style={{ display:"flex", flexDirection:"column", gap:20 }}>
             <AnimatePresence mode="wait">
               <motion.div key={filter} initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} transition={{ duration:0.2 }} style={{ display:"flex", flexDirection:"column", gap:20 }}>
@@ -376,7 +376,27 @@ export default function SkillsSection() {
           <OverviewSidebar sectionInView={sectionInView} activeFilter={filter}/>
         </div>
       </div>
-      <style>{`@media (max-width: 860px) { div[style*="gridTemplateColumns: 1fr 280px"] { grid-template-columns: 1fr !important; } }`}</style>
+      <style>{`
+        .skills-layout {
+          grid-template-columns: 1fr 280px;
+        }
+        @media (max-width: 900px) {
+          .skills-layout {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .skills-filter-bar {
+            overflow-x: auto;
+            flex-wrap: nowrap !important;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+          }
+          .skills-filter-bar::-webkit-scrollbar { display: none; }
+          .skills-filter-bar button { flex-shrink: 0; }
+        }
+      `}</style>
     </section>
   );
 }

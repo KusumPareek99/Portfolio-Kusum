@@ -175,7 +175,7 @@ export default function Navbar() {
             {/* Resume button — hidden on small screens */}
             <motion.button
               className="navbar-resume-btn"
-              onClick={() => window.open("/resume.pdf", "_blank")}
+              onClick={() => window.open("/Kusum-Pareek-SDE-Resume.pdf", "_blank")}
               onMouseEnter={() => setResumeHov(true)}
               onMouseLeave={() => setResumeHov(false)}
               whileTap={{ scale: 0.96 }}
@@ -287,8 +287,8 @@ export default function Navbar() {
 
               <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${T.border}` }}>
                 <motion.button
-                  whileTap={{ scale: 0.97 }}
-                  onClick={() => { window.open("/resume.pdf", "_blank"); setMobileOpen(false); }}
+                  whileTap={{ scale: 0.97 }}    
+                  onClick={() => { window.open("/Kusum-Pareek-SDE-Resume.pdf", "_blank"); setMobileOpen(false); }}
                   style={{
                     width:       "100%",
                     display:     "flex", alignItems: "center", justifyContent: "center", gap: 8,
