@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 
 export const runtime = "edge";
-export const contentType = "image/png";
 
 export async function GET(_req: NextRequest) {
   return new ImageResponse(
