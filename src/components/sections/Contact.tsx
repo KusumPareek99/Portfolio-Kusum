@@ -497,7 +497,7 @@ export default function ContactSection() {
             </div>
 
             {/* Resume */}
-            <motion.a href="/resume.pdf" target="_blank" rel="noopener noreferrer"
+            <motion.a href="/Kusum-Pareek-SDE-Resume.pdf" target="_blank" rel="noopener noreferrer"
               initial={{opacity:0,y:16}} animate={leftInView?{opacity:1,y:0}:{}}
               transition={{delay:0.55,type:"spring",stiffness:150}}
               whileHover={{scale:1.02,borderColor:T.violet+"88"}} whileTap={{scale:0.98}}
