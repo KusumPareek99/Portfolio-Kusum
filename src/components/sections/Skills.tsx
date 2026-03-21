@@ -149,11 +149,11 @@ function SkillRow({ sk, index, triggered }: { sk: SkillItem; index: number; trig
       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = C.border;      (e.currentTarget as HTMLElement).style.background = C.s2; }}
     >
       <motion.div style={{ width:10, height:10, borderRadius:"50%", flexShrink:0, background:sk.color, boxShadow:`0 0 8px ${sk.color}99` }} whileHover={{ scale:1.4 }}/>
-      <span style={{ fontFamily:" .nextSyne',sans-serif", fontWeight:700, fontSize:13, color:C.t1, flex:1 }}>{sk.name}</span>
-      <div style={{ width:80, flexShrink:0 }}><HBar pct={sk.pct} color={sk.color} triggered={triggered} delay={0.06*index+0.1}/></div>
+      <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:13, color:C.t1, flex:1 }}>{sk.name}</span>
+      <div className="skill-row-bar" style={{ width:80, flexShrink:0 }}><HBar pct={sk.pct} color={sk.color} triggered={triggered} delay={0.06*index+0.1}/></div>
       <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:sk.color, width:34, textAlign:"right", flexShrink:0 }}>{sk.pct}%</span>
       <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, letterSpacing:"0.06em", color:ts.color, background:ts.bg, border:`1px solid ${ts.border}`, borderRadius:999, padding:"2px 8px", flexShrink:0 }}>{sk.tag}</span>
-      <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.t3, flexShrink:0, width:28 }}>{sk.years}</span>
+      <span className="skill-row-years" style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.t3, flexShrink:0, width:28 }}>{sk.years}</span>
     </motion.div>
   );
 }
@@ -198,7 +198,7 @@ function CategoryPanel({ catKey, view, sectionInView }: { catKey: string; view: 
     <motion.div ref={ref} initial={{ opacity:0, y:32 }} animate={triggered ? { opacity:1, y:0 } : {}} transition={{ duration:0.6, ease:[0.25,0.4,0.25,1] }}
       style={{ background:C.s1, border:`1px solid ${C.border}`, borderRadius:20, overflow:"hidden" }}>
       <div style={{ height:3, background:`linear-gradient(90deg, ${cat.accent}, ${cat.secondAccent}, transparent)` }}/>
-      <div style={{ padding:"20px 22px 0", display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:12 }}>
+      <div style={{ padding:"20px 22px 0", display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:12, flexWrap:"wrap" }}>
         <div style={{ display:"flex", gap:12, alignItems:"center" }}>
           <div style={{ width:42, height:42, borderRadius:12, flexShrink:0, background:cat.accent+"16", border:`1px solid ${cat.accent}33`, display:"flex", alignItems:"center", justifyContent:"center", color:cat.accent }}>{cat.icon}</div>
           <div>
@@ -206,7 +206,7 @@ function CategoryPanel({ catKey, view, sectionInView }: { catKey: string; view: 
             <div style={{ fontFamily:"'Epilogue',sans-serif", fontSize:12, color:C.t2, marginTop:2 }}>{cat.description}</div>
           </div>
         </div>
-        <div style={{ display:"flex", gap:12, flexShrink:0, padding:"10px 14px", borderRadius:12, background:C.s2, border:`1px solid ${C.border}` }}>
+        <div className="cat-stats-box" style={{ display:"flex", gap:12, padding:"10px 14px", borderRadius:12, background:C.s2, border:`1px solid ${C.border}` }}>
           {[{ n:cat.items.length, l:"skills" }, { n:`${avg}%`, l:"avg" }, { n:experts, l:"experts" }].map(s => (
             <div key={s.l} style={{ textAlign:"center" }}>
               <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:16, background:`linear-gradient(135deg, ${cat.accent}, ${cat.secondAccent})`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>{s.n}</div>
@@ -219,7 +219,7 @@ function CategoryPanel({ catKey, view, sectionInView }: { catKey: string; view: 
         <AnimatePresence mode="wait">
           {view === "grid" ? (
             <motion.div key="grid" initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} transition={{ duration:0.2 }}
-              style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(120px, 1fr))", gap:8 }}>
+              style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(100px, 1fr))", gap:8 }}>
               {cat.items.map((sk, i) => <SkillCard key={sk.name} sk={sk} index={i} triggered={triggered}/>)}
             </motion.div>
           ) : (
@@ -356,7 +356,8 @@ export default function SkillsSection() {
   const visibleKeys = filter === "all" ? CATEGORY_KEYS : CATEGORY_KEYS.filter(k => k === filter);
 
   return (
-    <section ref={sectionRef} style={{ background:C.bg, minHeight:"100vh", padding:"80px 16px 80px", position:"relative", overflow:"hidden" }}>
+    <section id="skills" style={{ background:C.bg, minHeight:"100vh", padding:"80px 16px 80px", position:"relative", overflow:"hidden" }}>
+      <div ref={sectionRef} style={{ position:"absolute", top:0, left:0, right:0, bottom:0, pointerEvents:"none" }}/>
       <div style={{ position:"absolute", top:"-8%", right:"-4%", width:"38%", height:"48%", background:`radial-gradient(ellipse, ${C.violet}0B 0%, transparent 70%)`, borderRadius:"50%", pointerEvents:"none" }}/>
       <div style={{ position:"absolute", bottom:"-6%", left:"-4%", width:"34%", height:"44%", background:`radial-gradient(ellipse, ${C.cyan}07 0%, transparent 70%)`, borderRadius:"50%", pointerEvents:"none" }}/>
       <motion.div initial={{ scaleX:0 }} animate={sectionInView ? { scaleX:1 } : {}} transition={{ duration:1.4, ease:[0.25,0.4,0.25,1] }}
@@ -395,6 +396,11 @@ export default function SkillsSection() {
           }
           .skills-filter-bar::-webkit-scrollbar { display: none; }
           .skills-filter-bar button { flex-shrink: 0; }
+          /* Hide progress bar and years in list view rows on mobile to prevent overflow */
+          .skill-row-bar   { display: none !important; }
+          .skill-row-years { display: none !important; }
+          /* Stats box wraps below icon on mobile */
+          .cat-stats-box { flex-shrink: 0; width: 100%; justify-content: flex-start; }
         }
       `}</style>
     </section>

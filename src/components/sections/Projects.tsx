@@ -225,6 +225,7 @@ function FeaturedCard({ project, index }: { project: Project; index: number }) {
       transition={{ delay:index*0.12, type:"spring", stiffness:90, damping:20 }}>
       <TiltCard style={{ borderRadius:22, display:"block" } as React.CSSProperties}>
         <motion.article onHoverStart={() => setHov(true)} onHoverEnd={() => setHov(false)}
+          className="featured-card-inner"
           style={{
             display:"grid", gridTemplateColumns:"1fr 1fr",
             background:T.s1, border:`1px solid ${hov ? project.accent+"55" : T.border}`,
@@ -391,7 +392,7 @@ function SectionHeader({ inView }: { inView: boolean }) {
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", flexWrap:"wrap", gap:16 }}>
         <h2 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, margin:0,
           fontSize:"clamp(2rem,5vw,3.8rem)", lineHeight:1.05, color:T.t1 }}>
-          Things I&apos;ve{" "}
+          Things I've{" "}
           <span style={{ background:`linear-gradient(135deg, ${T.violet}, ${T.cyan})`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>Shipped</span>
         </h2>
         <div style={{ display:"flex", gap:10 }}>
@@ -431,7 +432,7 @@ export default function ProjectsSection() {
   ];
 
   return (
-    <section style={{ background:T.bg, minHeight:"100vh", padding:"80px 16px 80px", position:"relative", overflow:"hidden" }}>
+    <section id="projects" style={{ background:T.bg, minHeight:"100vh", padding:"80px 16px 80px", position:"relative", overflow:"hidden" }}>
       <div style={{position:"absolute",top:"-6%",right:"-4%",width:"38%",height:"50%",background:`radial-gradient(ellipse,${T.violet}0B 0%,transparent 70%)`,borderRadius:"50%",pointerEvents:"none"}}/>
       <div style={{position:"absolute",bottom:"-6%",left:"-4%",width:"34%",height:"44%",background:`radial-gradient(ellipse,${T.cyan}07 0%,transparent 70%)`,borderRadius:"50%",pointerEvents:"none"}}/>
       {dots.map((d,i) => (
@@ -492,7 +493,23 @@ export default function ProjectsSection() {
       </div>
 
       <style>{`
-        @media (max-width:680px) { article[style*="gridTemplateColumns"] { grid-template-columns: 1fr !important; } }
+        /* Featured card: stack image above content on mobile */
+        @media (max-width: 740px) {
+          .featured-card-inner {
+            grid-template-columns: 1fr !important;
+          }
+          .featured-card-inner > div:first-child {
+            min-height: 220px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .featured-card-inner > div:first-child {
+            min-height: 180px !important;
+          }
+          .featured-card-inner > div:last-child {
+            padding: 20px 16px !important;
+          }
+        }
       `}</style>
     </section>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const CYAN   = "#22D3EE";
@@ -19,6 +19,14 @@ export default function CursorFollower() {
   const y  = useSpring(outerY, { stiffness: 200, damping: 30 });
   const ix = useSpring(innerX, { stiffness: 900, damping: 45 });
   const iy = useSpring(innerY, { stiffness: 900, damping: 45 });
+
+  const [ready, setReady] = useState(false);
+
+useEffect(() => {
+  setReady(true);
+}, []);
+
+if (!ready) return null;
 
   useEffect(() => {
     // Inject cursor:none — appended last so it wins cascade
