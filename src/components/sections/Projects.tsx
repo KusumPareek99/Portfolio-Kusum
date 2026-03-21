@@ -392,7 +392,7 @@ function SectionHeader({ inView }: { inView: boolean }) {
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", flexWrap:"wrap", gap:16 }}>
         <h2 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, margin:0,
           fontSize:"clamp(2rem,5vw,3.8rem)", lineHeight:1.05, color:T.t1 }}>
-          Things I've{" "}
+          Things I&apos;ve{" "}
           <span style={{ background:`linear-gradient(135deg, ${T.violet}, ${T.cyan})`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>Shipped</span>
         </h2>
         <div style={{ display:"flex", gap:10 }}>

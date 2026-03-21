@@ -121,7 +121,8 @@ function useIntersection(options: { once?: boolean; threshold?: number | number[
     }, { threshold: options.threshold ?? [0, 0.1, 0.2, 0.5, 1], rootMargin: options.rootMargin ?? "0px" });
     obs.observe(el);
     return () => obs.disconnect();
-  }, [options.once, options.rootMargin]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options.once, options.rootMargin, options.threshold]);
 
   return { ref, inView, ratio };
 }

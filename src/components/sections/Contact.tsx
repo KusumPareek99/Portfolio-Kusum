@@ -187,7 +187,7 @@ function SuccessOverlay({ onReset }: { onReset: () => void }) {
         <h3 style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:24,color:T.t1,margin:"0 0 8px" }}>
           Message Sent! 🎉</h3>
         <p style={{ fontFamily:"'Epilogue',sans-serif",fontSize:14,color:T.t2,lineHeight:1.7,margin:"0 0 4px" }}>
-          Thanks for reaching out! I'll reply within <strong style={{color:T.violet}}>24–48 hours</strong>.</p>
+          Thanks for reaching out! I&apos;ll reply within <strong style={{color:T.violet}}>24–48 hours</strong>.</p>
         <p style={{ fontFamily:"'Epilogue',sans-serif",fontSize:13,color:T.t3,margin:0 }}>
           Check your inbox for a confirmation email.</p>
       </motion.div>
@@ -301,7 +301,7 @@ function ContactForm({ inView }: { inView: boolean }) {
                 SEND A MESSAGE
               </div>
               <h3 style={{ fontFamily:"'Syne',sans-serif",fontWeight:800,fontSize:26,color:T.t1,margin:0,lineHeight:1.1 }}>
-                Let's{" "}
+                Let&apos;s{" "}
                 <span style={{ background:`linear-gradient(135deg,${T.violet},${T.cyan})`,
                   WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent" }}>work together</span>
               </h3>
@@ -366,7 +366,7 @@ function ContactForm({ inView }: { inView: boolean }) {
             </form>
 
             <p style={{ fontFamily:"'Epilogue',sans-serif",fontSize:11,color:T.t3,textAlign:"center",margin:"16px 0 0" }}>
-              🔒 Your info is safe. I'll never share your email.
+              🔒 Your info is safe. I&apos;ll never share your email.
             </p>
           </motion.div>
         )}

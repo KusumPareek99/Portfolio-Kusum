@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const CYAN   = "#22D3EE";
@@ -20,16 +20,8 @@ export default function CursorFollower() {
   const ix = useSpring(innerX, { stiffness: 900, damping: 45 });
   const iy = useSpring(innerY, { stiffness: 900, damping: 45 });
 
-  const [ready, setReady] = useState(false);
-
-useEffect(() => {
-  setReady(true);
-}, []);
-
-if (!ready) return null;
-
+  // ALL hooks called unconditionally — no early return before this
   useEffect(() => {
-    // Inject cursor:none — appended last so it wins cascade
     const existing = document.getElementById("kp-no-cursor");
     if (!existing) {
       const s = document.createElement("style");
@@ -43,7 +35,6 @@ if (!ready) return null;
     function onMove(e: MouseEvent) {
       if (!moved) {
         moved = true;
-        // Snap to position instantly on first move — no spring lag from -500
         outerX.jump(e.clientX);
         outerY.jump(e.clientY);
         innerX.jump(e.clientX);
@@ -64,13 +55,13 @@ if (!ready) return null;
       dotSize.set(isLink ? 5 : 8);
     }
 
-    function onOut()    { outerSize.set(22); dotSize.set(8); }
-    function onLeave()  { opacity.set(0); }
-    function onEnter()  { if (moved) opacity.set(0.9); }
+    function onOut()   { outerSize.set(22); dotSize.set(8); }
+    function onLeave() { opacity.set(0); }
+    function onEnter() { if (moved) opacity.set(0.9); }
 
-    window.addEventListener("mousemove",    onMove,   { passive: true });
-    window.addEventListener("mouseover",    onOver,   { passive: true });
-    window.addEventListener("mouseout",     onOut,    { passive: true });
+    window.addEventListener("mousemove",    onMove,  { passive: true });
+    window.addEventListener("mouseover",    onOver,  { passive: true });
+    window.addEventListener("mouseout",     onOut,   { passive: true });
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("mouseenter", onEnter);
 
@@ -82,52 +73,39 @@ if (!ready) return null;
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
     };
-  // deps intentionally empty — motion values are stable refs
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      {/* Outer ring */}
       <motion.div
         aria-hidden="true"
         style={{
-          position:     "fixed",
-          top:          0,
-          left:         0,
+          position: "fixed", top: 0, left: 0,
           x, y,
-          translateX:   "-50%",
-          translateY:   "-50%",
-          width:        outerSize,
-          height:       outerSize,
+          translateX: "-50%", translateY: "-50%",
+          width: outerSize, height: outerSize,
           borderRadius: "50%",
-          background:   `rgba(139,92,246,0.12)`,
-          border:       `1.5px solid rgba(139,92,246,0.45)`,
-          pointerEvents:"none",
-          zIndex:       2147483645,
+          background: "rgba(139,92,246,0.12)",
+          border: "1.5px solid rgba(139,92,246,0.45)",
+          pointerEvents: "none",
+          zIndex: 2147483645,
           opacity,
         }}
       />
-
-      {/* Inner dot */}
       <motion.div
         aria-hidden="true"
         style={{
-          position:     "fixed",
-          top:          0,
-          left:         0,
-          x:  ix,
-          y:  iy,
-          translateX:   "-50%",
-          translateY:   "-50%",
-          width:        dotSize,
-          height:       dotSize,
+          position: "fixed", top: 0, left: 0,
+          x: ix, y: iy,
+          translateX: "-50%", translateY: "-50%",
+          width: dotSize, height: dotSize,
           borderRadius: "50%",
-          background:   CYAN,
-          pointerEvents:"none",
-          zIndex:       2147483646,
+          background: CYAN,
+          pointerEvents: "none",
+          zIndex: 2147483646,
           opacity,
-          boxShadow:    `0 0 10px ${CYAN}BB`,
+          boxShadow: `0 0 10px ${CYAN}BB`,
         }}
       />
     </>
