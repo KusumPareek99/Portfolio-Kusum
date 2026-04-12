@@ -23,14 +23,19 @@ const tokens = {
 };
 
 const techStack = [
+  { name: "Java", color: "#3776AB", bg: "rgba(55,118,171,0.14)" },
+  { name: "Springboot", color: "#A78BFA", bg: "rgba(167,139,250,0.12)" },
   { name: "Node.js", color: "#68A063", bg: "rgba(104,160,99,0.12)" },
   { name: "React", color: "#61DAFB", bg: "rgba(97,218,251,0.10)" },
   { name: "Python", color: "#3776AB", bg: "rgba(55,118,171,0.14)" },
+  { name: "FastAPI", color: "#009485", bg: "rgba(0,148,133,0.12)" },
   { name: "TypeScript", color: "#3178C6", bg: "rgba(49,120,198,0.13)" },
   { name: "Azure", color: "#0089D0", bg: "rgba(0,137,208,0.13)" },
   { name: "MongoDB", color: "#4DB33D", bg: "rgba(77,179,61,0.11)" },
   { name: "Express.js", color: "#A78BFA", bg: "rgba(167,139,250,0.12)" },
   { name: "PostgreSQL", color: "#336791", bg: "rgba(51,103,145,0.14)" },
+  { name: "Firebase", color: "#e88000", bg: "rgba(34, 211, 238, 0.10)" },
+  { name: "MySQL", color: "#3E6E93", bg: "rgba(49,120,198, 0.13)" },
   { name: "Flask", color: "#22D3EE", bg: "rgba(34,211,238,0.10)" },
   { name: "Git", color: "#F05032", bg: "rgba(240,80,50,0.12)" },
 ];
@@ -347,6 +352,15 @@ function FloatingCodeCard() {
     {
       indent: 2,
       tokens: [
+        { t: '"Java"', c: "#B81809" },
+        { t: ", ", c: "#64748B" },
+        { t: '"Springboot"', c: "#A78BFA" },
+        { t: ", ", c: "#64748B" },
+      ],
+    },
+    {
+      indent: 2,
+      tokens: [
         { t: '"Node"', c: "#68A063" },
         { t: ", ", c: "#64748B" },
         { t: '"React"', c: "#61DAFB" },
@@ -585,10 +599,12 @@ export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
   const roleText = useTypewriter(
     [
+      "Java Backend Developer",
       "Software Development Engineer",
-      "Backend Architect",
+      "Backend Engineer",
       "Full Stack Developer",
       "Azure Cloud Practitioner",
+      "Python Developer"
     ],
     75,
     2400,

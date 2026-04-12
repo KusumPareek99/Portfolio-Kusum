@@ -38,17 +38,24 @@ const T = {
 };
 
 const PROJECTS = [
+  { id:"employee-mgmt",       title:"Employee Management System",             subtitle:"RESTful API built with Spring Boot for managing employee records",
+    description:"A production-ready RESTful API built with Spring Boot for managing employee records. Demonstrates layered architecture, Spring Data JPA, MySQL/TiDB integration, Bean Validation, and global exception handling.",
+    year:"2026", tags:["Java 17","Spring Boot 3.2.2","Spring Web (REST)","Spring Data JPA + Hibernate","MySQL / TiDB Cloud","Maven", "Lombok", "Postman"],
+    github:"https://github.com/KusumPareek99/Employee-Management--Springboot-Application", demo:"https://employee-management-springboot-application-production.up.railway.app/api/v1/employees" as string|null,
+    category:"Backend",    featured:true,  accent:T.violet,  secondAccent:"#A78BFA",
+    emoji:"🧑‍💼", stat:{value:"Live",label:"Employee Management"}, bgPattern:"grid",
+    bgGrad:"linear-gradient(135deg, #1a0a2e 0%, #0d1628 60%, #030812 100%)" },
   { id:"reelx",       title:"ReelX",             subtitle:"AI Movie Recommendation Engine",
     description:"Flask-based recommendation system using cosine similarity on TF-IDF vectors. Integrated TMDB API for real-time metadata across 5,000+ titles with sub-100ms API responses.",
     year:"2025", tags:["Flask","Python","scikit-learn","React.js","TMDB API","Tailwind CSS"],
-    github:"https://github.com/KusumPareek99", demo:"https://movie-recommendation-app-woad.vercel.app/" as string|null,
+    github:"https://github.com/KusumPareek99/movie-recommendation-app", demo:"https://movie-recommendation-app-woad.vercel.app/" as string|null,
     category:"AI / ML",    featured:true,  accent:T.violet,  secondAccent:"#A78BFA",
     emoji:"🎬", stat:{value:"5K+",label:"Movies"}, bgPattern:"film",
     bgGrad:"linear-gradient(135deg, #1a0a2e 0%, #0d1628 60%, #030812 100%)" },
   { id:"shopbazaar",  title:"ShopBazaar",         subtitle:"Full-Stack E-Commerce Platform",
     description:"Complete commerce solution with multi-filter product search, JWT auth, Braintree payment gateway, and an admin dashboard for inventory and order management.",
     year:"2024", tags:["Node.js","Express.js","MongoDB","React.js","JWT","Braintree"],
-    github:"https://github.com/KusumPareek99", demo:"https://shopbazaar-app.onrender.com/" as string|null,
+    github:"https://github.com/KusumPareek99/production-mern-shopbazaar-ecommerce", demo:"https://shopbazaar-app.onrender.com/" as string|null,
     category:"Full Stack", featured:true,  accent:T.emerald, secondAccent:"#34D399",
     emoji:"🛍", stat:{value:"Live",label:"Deploy"}, bgPattern:"grid",
     bgGrad:"linear-gradient(135deg, #051a0d 0%, #031409 60%, #010806 100%)" },
@@ -96,7 +103,7 @@ const PROJECTS = [
     bgGrad:"linear-gradient(135deg, #021a0d 0%, #011008 60%, #000804 100%)" },
 ];
 
-const CATEGORIES = ["All", "Full Stack", "AI / ML", "Frontend", "Data Science", "Mobile"];
+const CATEGORIES = ["All","Backend", "Full Stack", "AI / ML", "Frontend", "Data Science", "Mobile"];
 
 type Project = typeof PROJECTS[number];
 

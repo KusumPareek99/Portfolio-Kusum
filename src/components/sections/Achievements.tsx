@@ -32,6 +32,7 @@ const ISSUER_TEXT: Record<string, string> = {
 
 const HIGHLIGHT_CARDS = [
   { label: "Gold Medalist", sub: "BCA · 90.29%", color: "#F59E0B" },
+  { label: "4★ Java",     sub: "HackerRank",   color: "#00EA64" },
   { label: "5★ Python",     sub: "HackerRank",   color: "#00EA64" },
   { label: "4★ SQL",        sub: "HackerRank",   color: "#00EA64" },
   { label: "GSSoC '24",     sub: "Open Source",  color: "#8B5CF6" },

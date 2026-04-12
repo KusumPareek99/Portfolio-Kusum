@@ -518,17 +518,17 @@ export default function ContactSection() {
         </div>
 
         {/* Footer strip */}
-        <motion.div initial={{opacity:0}} animate={sectionInView?{opacity:1}:{}} transition={{delay:0.7}}
+        {/* <motion.div initial={{opacity:0}} animate={sectionInView?{opacity:1}:{}} transition={{delay:0.7}}
           style={{marginTop:48,paddingTop:32,borderTop:`1px solid ${T.border}`,
             display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:12}}>
           <div style={{fontFamily:"'Epilogue',sans-serif",fontSize:13,color:T.t3}}>
-            © 2025 Kusum Pareek · Built with Next.js + Framer Motion</div>
+            © 2026 Kusum Pareek · Built with Next.js + Framer Motion</div>
           <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11,color:T.t3,
             display:"flex",alignItems:"center",gap:6}}>
             <span style={{width:6,height:6,borderRadius:"50%",background:T.emerald,display:"inline-block"}}/>
             All systems operational
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
 
       <style>{`

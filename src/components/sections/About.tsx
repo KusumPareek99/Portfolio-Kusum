@@ -244,7 +244,9 @@ export default function About() {
                   I&apos;m a results-driven Software Development Engineer with
                   strong hands-on experience in backend and full-stack
                   development. I design, build, and deploy scalable systems
-                  using <span style={{ color: T.t1 }}>Node.js</span>,{" "}
+                  using <span style={{ color: T.t1 }}>Java</span>,{" "} 
+                  <span style={{ color: T.t1 }}>Springboot</span>,{" "}
+                  <span style={{ color: T.t1 }}>Node.js</span>,{" "}
                   <span style={{ color: T.t1 }}>Python (Flask)</span>,{" "}
                   <span style={{ color: T.t1 }}>React</span>, and cloud
                   platforms.

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Syne, Epilogue, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
 
-// ✅ FIX: No curly braces — these are DEFAULT exports
+// No curly braces — these are DEFAULT exports
 import SmoothScrollProvider   from "@/components/providers/SmoothScrollProvider";
 import AnimationsOrchestrator from "@/components/animations/AnimationsOrchestrator";
 
@@ -31,7 +31,7 @@ const jetbrainsMono = JetBrains_Mono({
 const SITE_URL  = process.env.NEXT_PUBLIC_SITE_URL || "https://kusumpareek.dev";
 const SITE_NAME = "Kusum Pareek — Software Development Engineer";
 const DESCRIPTION =
-  "Results-driven Software Development Engineer specialising in Node.js, React, Python and Azure Cloud. Gold Medallist, BCA. Building scalable backend systems and full-stack applications from Pune, India.";
+  "Results-driven Software Development Engineer specialising in Java, Springboot, Node.js, React, Python and Azure Cloud. Gold Medallist, BCA. Building scalable backend systems and full-stack applications from Pune, India.";
 
 export const viewport: Viewport = {
   width: "device-width", initialScale: 1, maximumScale: 5,

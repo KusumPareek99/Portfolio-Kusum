@@ -57,7 +57,7 @@ const EXPERIENCES = [
   {
     id: "cutecode",
     company: "CuteCode Street Style Store LLP",
-    shortName: "CuteCode",
+    shortName: "SSS",
     role: "Software Developer Intern",
     type: "Internship",
     period: "Sep 2024 – Jan 2025",
