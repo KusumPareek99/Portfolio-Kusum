@@ -91,7 +91,7 @@ const personSchema = {
   jobTitle: "Software Development Engineer",
   description: DESCRIPTION,
   image: `${SITE_URL}/og-image.png`,
-  sameAs: ["https://github.com/KusumPareek99","https://linkedin.com/in/kusumpareek"],
+  sameAs: ["https://github.com/KusumPareek99","https://www.linkedin.com/in/kusum-p-a54759191/"],
   address: { "@type": "PostalAddress", addressLocality: "Pune",
              addressRegion: "Maharashtra", addressCountry: "IN" },
   alumniOf: [

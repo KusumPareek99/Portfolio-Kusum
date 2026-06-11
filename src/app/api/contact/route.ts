@@ -202,7 +202,7 @@ function buildAutoReplyHtml(name: string): string {
                               border-radius:8px;padding:10px 18px;">GitHub →</a>
                   </td>
                   <td>
-                    <a href="https://linkedin.com/in/kusumpareek"
+                    <a href="https://www.linkedin.com/in/kusum-p-a54759191/"
                        style="display:inline-block;background:#151528;border:1px solid #1A1A2E;
                               color:#22D3EE;font-size:13px;font-weight:600;text-decoration:none;
                               border-radius:8px;padding:10px 18px;">LinkedIn →</a>

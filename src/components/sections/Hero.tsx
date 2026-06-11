@@ -1015,7 +1015,7 @@ export default function HeroSection() {
               { label: "GitHub", href: "https://github.com/KusumPareek99" },
               {
                 label: "LinkedIn",
-                href: "https://www.linkedin.com/in/kusum-p-a54759191",
+                href: "https://www.linkedin.com/in/kusum-p-a54759191/",
               },
             ].map((s) => (
               <motion.a
