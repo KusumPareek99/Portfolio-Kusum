@@ -928,7 +928,7 @@ export default function HeroSection() {
             <MagneticButton
               variant="ghost"
               onClick={() =>
-                window.open("/Kusum-Pareek-SDE-Resume.pdf", "_blank")
+                window.open("/Kusum_Pareek_2026-06-26.pdf", "_blank")
               }
             >
               <svg
